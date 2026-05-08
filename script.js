@@ -286,6 +286,42 @@ function renderProfiles() {
 }
 
 /* ----------------------------------------------------------------
+   Upcoming section — fade in Ken Burns background on scroll
+   ---------------------------------------------------------------- */
+const DAF_IMAGES = [
+  'images/brakhot_2a.jpg',
+  'images/brakhot_10a.jpg',
+  'images/brakhot_61b.jpg',
+  'images/chabbath_31a.jpg',
+  'images/baba-metsia_59b.jpg',
+  'images/baba-metsia_84a.jpg'
+];
+
+function initUpcomingAnimation() {
+  const el = document.querySelector('.upcoming');
+  const bg = document.querySelector('.upcoming-bg');
+  if (!el || !bg) return;
+
+  let idx = Math.floor(Math.random() * DAF_IMAGES.length);
+  bg.style.backgroundImage = `url('${DAF_IMAGES[idx]}')`;
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) el.classList.add('in-view');
+  }, { threshold: 0.15 });
+  observer.observe(el);
+
+  // Crossfade to next image every 9 seconds
+  setInterval(() => {
+    idx = (idx + 1) % DAF_IMAGES.length;
+    bg.style.opacity = '0';
+    setTimeout(() => {
+      bg.style.backgroundImage = `url('${DAF_IMAGES[idx]}')`;
+      bg.style.opacity = el.classList.contains('in-view') ? '0.28' : '0';
+    }, 1600); // matches CSS transition duration
+  }, 9000);
+}
+
+/* ----------------------------------------------------------------
    Init
    ---------------------------------------------------------------- */
 function init() {
@@ -300,6 +336,7 @@ function init() {
   renderHero(today, cycleDay, current);
   renderBookshelf(map, current, next);
   renderProfiles();
+  initUpcomingAnimation();
 }
 
 document.addEventListener('DOMContentLoaded', init);
