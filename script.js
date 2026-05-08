@@ -242,13 +242,103 @@ const TEACHERS = [
 ];
 
 const SAGES = [
-  { name: 'Rashi',         initials: 'ר', era: '1040–1105 · France',         bio: 'The most influential Talmud commentator. His commentary appears on every page.',  daf: 'Berakhot 2a',      image: 'images/brakhot_2a.jpg' },
-  { name: 'Rabbi Akiva',   initials: 'ע', era: 'c. 50–135 CE',               bio: 'Shepherd turned sage. Foundational figure of rabbinic Judaism.',                  daf: 'Berakhot 61b',     image: 'images/brakhot_61b.jpg' },
-  { name: 'Hillel',        initials: 'ה', era: 'c. 110 BCE–10 CE',           bio: 'Famous for the Golden Rule. School of Hillel shaped halakhah.',                   daf: 'Shabbat 31a',      image: 'images/chabbath_31a.jpg' },
-  { name: 'Rava',          initials: 'ר', era: 'c. 280–352 · Babylon',       bio: 'Towering Babylonian sage. His debates with Abaye fill the Talmud.',               daf: 'Bava Metzia 59b',  image: 'images/baba-metsia_59b.jpg' },
-  { name: 'Rabbi Yochanan',initials: 'י', era: 'c. 180–279',                 bio: 'Compiler of the Jerusalem Talmud, known for piercing legal mind.',                 daf: 'Bava Metzia 84a',  image: 'images/baba-metsia_84a.jpg' },
-  { name: 'Beruriah',      initials: 'ב', era: '2nd century',                bio: 'One of the only women whose teachings appear in the Talmud.',                      daf: 'Berakhot 10a',     image: 'images/brakhot_10a.jpg' }
+  {
+    name: 'Rashi', initials: 'ר', era: '1040–1105 · France',
+    bio: 'The most influential Talmud commentator. His commentary appears on every page.',
+    daf: 'Berakhot 2a', image: 'images/brakhot_2a.jpg',
+    period: 'Rishon · 11th–12th century',
+    basedIn: 'Troyes, France',
+    knownFor: 'Line-by-line commentary that made the Talmud accessible to all — printed on every page ever since',
+    debatesWith: 'The Tosafists — his own grandsons and students, who challenge him in the outer column',
+    teaching: 'Rashi never assumed his reader already knew. He explained everything, from the simplest word to the most tangled legal argument. That radical clarity is his legacy.',
+    onThePage: 'The narrow inner column on every page is always Rashi. The distinctive slanted typeface — "Rashi script" — was named for him. Once you recognize it, you\'ll never miss him.'
+  },
+  {
+    name: 'Rabbi Akiva', initials: 'ע', era: 'c. 50–135 CE',
+    bio: 'Shepherd turned sage. Foundational figure of rabbinic Judaism.',
+    daf: 'Berakhot 61b', image: 'images/brakhot_61b.jpg',
+    period: 'Tanna · 3rd generation',
+    basedIn: 'Bnei Brak, Israel',
+    knownFor: 'Deriving new laws from every letter and ornament of the Torah; martyrdom under Rome',
+    debatesWith: 'Rabbi Ishmael, who argued Akiva read too much into the text',
+    teaching: '"Love your neighbor as yourself — this is the great principle of the entire Torah." (Yerushalmi Nedarim 9:4)',
+    onThePage: 'Scholars say the anonymous Mishnah — the passages with no named author — follows Rabbi Akiva\'s view. When the Mishnah speaks without attribution, it\'s likely his voice.'
+  },
+  {
+    name: 'Hillel', initials: 'ה', era: 'c. 110 BCE–10 CE',
+    bio: 'Famous for the Golden Rule. School of Hillel shaped halakhah.',
+    daf: 'Shabbat 31a', image: 'images/chabbath_31a.jpg',
+    period: 'Tanna · Zugot (paired) era',
+    basedIn: 'Jerusalem',
+    knownFor: 'Legal leniency and ethical clarity; founding the School of Hillel that shaped mainstream Jewish law',
+    debatesWith: 'Shammai — the two are paired on nearly every disputed question in the Mishnah',
+    teaching: '"What is hateful to you, do not do to your neighbor. That is the whole Torah — the rest is commentary. Go and learn." (Shabbat 31a)',
+    onThePage: '"Beit Hillel says… Beit Shammai says…" appears hundreds of times in the Talmud. The law almost always follows Hillel. When it follows Shammai, it\'s worth pausing to ask why.'
+  },
+  {
+    name: 'Rava', initials: 'ר', era: 'c. 280–352 · Babylon',
+    bio: 'Towering Babylonian sage. His debates with Abaye fill the Talmud.',
+    daf: 'Bava Metzia 59b', image: 'images/baba-metsia_59b.jpg',
+    period: 'Amora · 4th generation (Babylonian)',
+    basedIn: 'Machoza, Babylon',
+    knownFor: 'Civil and criminal law; his running debate with Abaye is the defining intellectual rivalry of the Talmud',
+    debatesWith: 'Abaye — the law follows Rava in all but six of their disputes. The six exceptions are memorized by a special mnemonic.',
+    teaching: '"A person should always live in the same city as their teacher." He modeled this himself, remaining in Machoza to study under Rav Yosef. (Berakhot 8a)',
+    onThePage: '"Rava said" often signals the resolution of a debate. When you see "Abaye said… Rava said…" side by side, expect Rava\'s view to win — and to become law.'
+  },
+  {
+    name: 'Rabbi Yochanan', initials: 'י', era: 'c. 180–279',
+    bio: 'Compiler of the Jerusalem Talmud, known for piercing legal mind.',
+    daf: 'Bava Metzia 84a', image: 'images/baba-metsia_84a.jpg',
+    period: 'Amora · 1st generation (Israeli)',
+    basedIn: 'Tiberias, Israel',
+    knownFor: 'The dominant voice of Israeli scholarship; principal architect of the Jerusalem Talmud',
+    debatesWith: 'Reish Lakish — his brother-in-law and the Talmud\'s most beloved intellectual friendship',
+    teaching: '"Whoever recites a teaching in the name of the one who said it brings redemption to the world." (Megillah 15a)',
+    onThePage: 'When Babylonian and Israeli sages disagree, Yochanan speaks for Israel. His opinions often begin "Rabbi Yochanan said in the name of…" — he was meticulous about attribution.'
+  },
+  {
+    name: 'Beruriah', initials: 'ב', era: '2nd century',
+    bio: 'One of the only women whose teachings appear in the Talmud.',
+    daf: 'Berakhot 10a', image: 'images/brakhot_10a.jpg',
+    period: 'Tanna · 2nd century',
+    basedIn: 'Israel (wife of Rabbi Meir)',
+    knownFor: 'The only woman whose legal rulings are recorded in the Talmud and accepted as authoritative',
+    debatesWith: 'Male sages she corrected on points of law — and her own husband, Rabbi Meir',
+    teaching: 'When her two sons died, she asked Rabbi Meir: "If someone entrusts you with a treasure, must you return it when asked?" He said yes. "God gave us these sons and has taken them back." (Midrash Mishlei 31)',
+    onThePage: 'Her appearances are rare and always deliberate — each one was preserved in a literature that rarely recorded women\'s voices. When she appears, it\'s worth stopping.'
+  }
 ];
+
+function openSageModal(sage) {
+  document.getElementById('sm-img').src = sage.image;
+  document.getElementById('sm-img').alt = sage.name;
+  document.getElementById('sm-name').textContent = sage.name;
+  document.getElementById('sm-era').textContent = sage.era;
+  document.getElementById('sm-period').textContent = sage.period;
+  document.getElementById('sm-basedin').textContent = sage.basedIn;
+  document.getElementById('sm-knownfor').textContent = sage.knownFor;
+  document.getElementById('sm-debates').textContent = sage.debatesWith;
+  document.getElementById('sm-teaching').textContent = sage.teaching;
+  document.getElementById('sm-onpage').textContent = sage.onThePage;
+  document.getElementById('sage-modal').classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSageModal() {
+  document.getElementById('sage-modal').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+
+function initSageModal() {
+  document.getElementById('sage-close').addEventListener('click', closeSageModal);
+  document.getElementById('sage-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeSageModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSageModal();
+  });
+}
 
 function renderProfiles() {
   const teacherRow = document.getElementById('teachers');
@@ -270,6 +360,8 @@ function renderProfiles() {
   SAGES.forEach(p => {
     const card = document.createElement('a');
     card.className = 'person';
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => openSageModal(p));
     const avatarInner = p.image
       ? `<img src="${p.image}" alt="Vilna Shas ${p.daf}" class="avatar-daf">`
       : p.initials;
@@ -335,6 +427,7 @@ function init() {
   renderBookshelf(map, current, next);
   renderProfiles();
   initUpcomingAnimation();
+  initSageModal();
 }
 
 document.addEventListener('DOMContentLoaded', init);
