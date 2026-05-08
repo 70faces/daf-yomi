@@ -255,7 +255,6 @@ function renderProfiles() {
   TEACHERS.forEach(p => {
     const card = document.createElement('a');
     card.className = 'person';
-    card.href = '#'; // placeholder until real teacher pages exist
     const avatarInner = p.image
       ? `<img src="${p.image}" alt="${p.name}" class="avatar-daf">`
       : p.initials;
@@ -271,7 +270,6 @@ function renderProfiles() {
   SAGES.forEach(p => {
     const card = document.createElement('a');
     card.className = 'person';
-    card.href = '#'; // placeholder until real sage profiles exist
     const avatarInner = p.image
       ? `<img src="${p.image}" alt="Vilna Shas ${p.daf}" class="avatar-daf">`
       : p.initials;
