@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daf Yomi · My Jewish Learning</title>
+<meta name="description" content="A live hub for the global project of daily Talmud study. Today's daf, archive, teachers, and ways to follow along.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/lora@5.0.0/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.0/700.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <a href="https://www.myjewishlearning.com/" class="logo-link">My Jewish Learning</a>
+    <nav class="header-nav">
+      <a href="https://www.myjewishlearning.com/category/study/jewish-texts/talmud/">All Talmud</a>
+      <a href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/" class="nav-cta">Subscribe</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- HERO: TODAY'S DAF -->
+  <section class="card hero">
+    <div class="eyebrow" id="hero-eyebrow">Today on Daf Yomi</div>
+    <h1 class="h-title" id="hero-title">Loading today's page&hellip;</h1>
+    <p class="h-sub" id="hero-sub">&nbsp;</p>
+    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+    <div class="timeline-row">
+      <span>Jan 5, 2020</span><span id="timeline-mid">&mdash;</span><span>Jun 7, 2027</span>
+    </div>
+    <div class="stat-row">
+      <div><div class="stat-label">Tractate</div><div class="stat-value" id="stat-tractate">&mdash;</div></div>
+      <div><div class="stat-label">Day</div><div class="stat-value" id="stat-day">&mdash;</div></div>
+      <div><div class="stat-label">Cycle ends</div><div class="stat-value">Jun 2027</div></div>
+    </div>
+    <div class="btn-row">
+      <a class="btn-primary" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">Subscribe to A Daily Dose of Talmud</a>
+      <a class="btn-secondary" id="archive-cta" href="https://www.myjewishlearning.com/category/study/jewish-texts/talmud/tractate-menachot/">Browse the current tractate</a>
+    </div>
+  </section>
+
+  <!-- WHY FOLLOW ALONG -->
+  <aside class="why">
+    <div class="why-eye">Why follow along</div>
+    <h2 class="why-h">The Talmud is the bedrock of Jewish thought</h2>
+    <p class="why-body">Every prayer, every holiday, every ritual you've encountered traces back to its arguments. Daf Yomi opens that 2,711-page library one page at a time. <em>A Daily Dose of Talmud</em> translates each one into a five-minute, plain-English insight &mdash; no Hebrew, no Aramaic, no prior knowledge required.</p>
+  </aside>
+
+  <!-- GET STARTED (countdown + calculator merged) -->
+  <section class="gs" id="get-started" hidden>
+    <div class="gs-num-block">
+      <div class="gs-num" id="gs-num">&mdash;</div>
+      <div class="gs-numlabel" id="gs-numlabel">days</div>
+    </div>
+    <div class="gs-body">
+      <div class="gs-eye">A new tractate begins</div>
+      <h2 class="gs-title" id="gs-title">Start fresh with Tractate Chullin &middot; May 2, 2026</h2>
+      <p class="gs-desc">142 days on Jewish dietary law &mdash; a clean on-ramp for new learners. We recommend waiting these few days rather than jumping into the middle of Menachot.</p>
+      <div class="gs-options">
+        <a class="btn-primary btn-amber" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">Subscribe for May 2 launch</a>
+        <div class="gs-alt">or <a href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">start today</a> with the current page</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sec-divider"></div>
+
+  <!-- BOOKSHELF -->
+  <div class="eyebrow eyebrow-c">The 14th cycle &middot; 37 volumes</div>
+  <h2 class="h-title h-center">The Talmud, on a shelf</h2>
+  <p class="h-sub h-center">Pull any volume down to read its archive of Daily Doses</p>
+
+  <div class="room">
+    <div class="shelf-row" id="row-1"></div>
+    <div class="shelf-floor"></div>
+    <div class="shelf-row" id="row-2"></div>
+    <div class="shelf-floor"></div>
+    <div class="shelf-row" id="row-3"></div>
+    <div class="shelf-floor"></div>
+    <div class="legend">
+      <span><span class="legend-swatch done"></span>Read</span>
+      <span><span class="legend-swatch cur"></span>Reading now</span>
+      <span><span class="legend-swatch next"></span>Next &middot; May 2</span>
+      <span><span class="legend-swatch"></span>Upcoming</span>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- STUDY WITH US: 5 WAYS -->
+  <p class="section-h">Five ways to engage</p>
+  <h2 class="section-title">Study with us</h2>
+  <p class="section-sub">However you like to learn &mdash; by email, by Zoom, by video, by book, by community.</p>
+
+  <div class="ways-grid">
+    <a class="way feat" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">
+      <div class="way-ico">📧</div>
+      <div>
+        <div class="way-eye">Daily &middot; email</div>
+        <h3 class="way-title">A Daily Dose of Talmud</h3>
+        <p class="way-desc">Five-minute insight on the day's page, in your inbox every morning. The heart of the project.</p>
+      </div>
+    </a>
+    <a class="way" href="https://docs.google.com/forms/d/e/1FAIpQLSeM09B8nrxRVTwZk7Do-VammeDzMNimev6MqXLDOInFhuc2eQ/viewform">
+      <div class="way-ico">🎥</div>
+      <div>
+        <div class="way-eye">Weekly &middot; Thursdays 9:30 AM ET</div>
+        <h3 class="way-title">The Week in Review</h3>
+        <p class="way-desc">Live Zoom recap of the week's pages, hosted by a familiar Daily Dose writer. Free.</p>
+      </div>
+    </a>
+    <a class="way" href="https://www.myjewishlearning.com/off-the-daf-a-talmud-book-club/">
+      <div class="way-ico">📚</div>
+      <div>
+        <div class="way-eye">Monthly &middot; book club</div>
+        <h3 class="way-title">Off the Daf</h3>
+        <p class="way-desc">Fiction and nonfiction inspired by the Talmud, with live conversations with authors.</p>
+      </div>
+    </a>
+    <a class="way" href="https://www.youtube.com/@MyJewishLearning">
+      <div class="way-ico">▶️</div>
+      <div>
+        <div class="way-eye">Anytime &middot; video</div>
+        <h3 class="way-title">Class archive</h3>
+        <p class="way-desc">Past Highlights sessions on YouTube &mdash; go back and rewatch anything you missed.</p>
+      </div>
+    </a>
+    <a class="way way-full" href="https://www.facebook.com/groups/dafyomi">
+      <div class="way-ico">💬</div>
+      <div>
+        <div class="way-eye">Daily &middot; community</div>
+        <h3 class="way-title">Daf Yomi Facebook group</h3>
+        <p class="way-desc">Our most active community &mdash; thousands of readers asking questions, sharing reactions, and discussing each day's page in real time.</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- MEET YOUR TEACHERS -->
+  <p class="section-h">The voices behind the project</p>
+  <h2 class="section-title">Meet your teachers</h2>
+  <p class="section-sub">A rotating team of rabbis, scholars, and writers craft each Daily Dose.</p>
+  <div class="scroll-row" id="teachers"></div>
+
+  <!-- MEET THE SAGES -->
+  <p class="section-h" style="margin-top:1.5rem;">From inside the text</p>
+  <h2 class="section-title">Meet the sages</h2>
+  <p class="section-sub">The rabbis you'll encounter on every page &mdash; quick primers on who they are and why they matter.</p>
+  <div class="scroll-row" id="sages"></div>
+
+  <div class="sec-divider"></div>
+
+  <!-- REFERENCE LIBRARY -->
+  <p class="section-h">Reference library</p>
+  <h2 class="section-title">Talmud, in plain English</h2>
+  <p class="section-sub">If a term in today's Daily Dose stops you, start here.</p>
+
+  <div class="ref-grid">
+    <a class="ref" href="https://www.myjewishlearning.com/article/talmud-101/">
+      <div class="ref-title">What is the Talmud?</div>
+      <p class="ref-desc">Mishnah, Gemara, and the 1,500-year conversation that shaped Jewish life.</p>
+    </a>
+    <a class="ref" href="https://www.myjewishlearning.com/article/the-mishnah/">
+      <div class="ref-title">Mishnah vs. Gemara</div>
+      <p class="ref-desc">The two layers on every page, and what each one contributes.</p>
+    </a>
+    <a class="ref" href="https://www.myjewishlearning.com/article/the-jerusalem-talmud/">
+      <div class="ref-title">Bavli vs. Yerushalmi</div>
+      <p class="ref-desc">Two Talmuds, two communities &mdash; why Daf Yomi follows the Babylonian.</p>
+    </a>
+    <a class="ref" href="https://www.myjewishlearning.com/article/talmud-words-and-phrases/">
+      <div class="ref-title">Glossary of terms</div>
+      <p class="ref-desc">Halakhah, aggadah, sugya, machloket &mdash; words that come up over and over.</p>
+    </a>
+    <a class="ref" href="https://www.myjewishlearning.com/article/the-six-orders-of-the-mishnah/">
+      <div class="ref-title">The six orders</div>
+      <p class="ref-desc">How the Talmud organizes itself &mdash; Zera'im, Mo'ed, Nashim, Nezikin, Kodashim, Tahorot.</p>
+    </a>
+    <a class="ref" href="https://www.myjewishlearning.com/article/9-things-to-know-about-the-daf-yomi-daily-page-of-talmud/">
+      <div class="ref-title">9 things to know about Daf Yomi</div>
+      <p class="ref-desc">A quick-read overview of the practice, its history, and how to make sense of what you're reading each day.</p>
+    </a>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- FAQ -->
+  <p class="section-h">Frequently asked</p>
+  <div class="faq">
+    <details open>
+      <summary>Do I need to know Hebrew or Aramaic?</summary>
+      <p class="faq-body">Not at all. The Daily Dose is written in clear English. Hebrew and Aramaic terms are explained in context. Many of our most loyal readers have no formal Jewish education or language background.</p>
+    </details>
+    <details>
+      <summary>What if I miss a day or fall behind?</summary>
+      <p class="faq-body">Don't worry about it. Most Daf Yomi readers miss days. The schedule waits for no one, but the archive is always here, and the next email always lands tomorrow. Consistency over perfection.</p>
+    </details>
+    <details>
+      <summary>How long does each day take?</summary>
+      <p class="faq-body">The Daily Dose is a five-minute read. Studying the actual page in depth typically takes 45&ndash;60 minutes, but that's optional &mdash; the email alone is meaningful.</p>
+    </details>
+    <details>
+      <summary>When does the current cycle end?</summary>
+      <p class="faq-body">The 14th cycle began January 5, 2020 and ends around June 7, 2027 with a global Siyyum HaShas celebration. The 15th cycle begins immediately after.</p>
+    </details>
+  </div>
+
+</main>
+
+<footer class="page-footer">
+  <p>A redesigned Daf Yomi hub for <a href="https://www.myjewishlearning.com/">My Jewish Learning</a> &middot; demo preview</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
