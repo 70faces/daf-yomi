@@ -460,7 +460,7 @@ a:hover { color: #3FC6F3; }
   border-radius: 4px;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  font-size: 18px;
+  color: #1D2936;
 }
 .way-eye {
   font-family: 'Montserrat', sans-serif;
