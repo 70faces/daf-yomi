@@ -740,4 +740,7 @@ a:hover { color: #3FC6F3; }
   .book { height: 110px; }
   .book-spine { font-size: 8.5px; padding: 4px 0; }
   .shelf-row { height: 140px; }
+  /* Scale books to fit mobile width */
+  .book { flex-shrink: 1; min-width: 12px; }
+  .book-spine { font-size: 7px; letter-spacing: 0; }
 }
