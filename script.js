@@ -139,7 +139,6 @@ function renderHero(today, cycleDay, current) {
     `Day ${cycleDay.toLocaleString()} of ${total.toLocaleString()} in the 14th cycle of Babylonian Talmud study`;
   document.getElementById('bar-fill').style.width = pct + '%';
   document.getElementById('timeline-mid').textContent = `${pct}% complete`;
-  document.getElementById('stat-day').textContent = cycleDay.toLocaleString();
 }
 
 /* ----------------------------------------------------------------
