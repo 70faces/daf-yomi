@@ -462,6 +462,12 @@ a:hover { color: #3FC6F3; }
   flex-shrink: 0;
   color: #1D2936;
 }
+.way-heb {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+}
 .way-eye {
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
