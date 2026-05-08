@@ -126,11 +126,8 @@ function renderHero(today, cycleDay, current) {
   if (current) {
     document.getElementById('hero-title').innerHTML =
       `Tractate ${current.tractate.name} &middot; Daf ${current.dafNumber}`;
-    document.getElementById('stat-tractate').textContent = current.tractate.name;
     if (current.tractate.url) {
-      document.getElementById('archive-cta').href = current.tractate.url;
-      document.getElementById('archive-cta').textContent =
-        `Browse the ${current.tractate.name} archive`;
+      document.getElementById('read-today-cta').href = current.tractate.url;
     }
   } else {
     document.getElementById('hero-title').textContent = 'The 14th cycle is complete';
@@ -302,7 +299,6 @@ function init() {
   const next = current ? getNextTractate(map, current.tractate) : null;
 
   renderHero(today, cycleDay, current);
-  renderGetStarted(today, current, next);
   renderBookshelf(map, current, next);
   renderProfiles();
 }

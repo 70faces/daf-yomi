@@ -240,7 +240,71 @@ a:hover { color: #3FC6F3; }
   font-size: 16px;
   line-height: 1.65;
   color: rgba(29,41,54,0.85);
-  margin: 0;
+  margin: 0 0 1.25rem;
+}
+
+/* UPCOMING EVENTS */
+.upcoming {
+  background: #fff;
+  border: 0.5px solid rgba(29,41,54,0.12);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  margin: 0 0 1rem;
+}
+.upcoming-eye {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(29,41,54,0.55);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.upcoming-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  line-height: 1.2;
+}
+.upcoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.upcoming-event {
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-top: 0.5px solid rgba(29,41,54,0.1);
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.15s;
+}
+.upcoming-event:hover { color: #3FC6F3; }
+.upcoming-date {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #3FC6F3;
+  min-width: 42px;
+  flex-shrink: 0;
+}
+.upcoming-type {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(29,41,54,0.45);
+  margin-bottom: 3px;
+}
+.upcoming-name {
+  font-size: 14px;
+  line-height: 1.35;
+  color: rgba(29,41,54,0.85);
 }
 
 /* GET STARTED (countdown + calculator merged) */
