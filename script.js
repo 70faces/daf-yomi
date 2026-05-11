@@ -136,7 +136,7 @@ function renderHero(today, cycleDay, current) {
   const total = CYCLE_TOTAL_DAYS;
   const pct = Math.max(0, Math.min(100, Math.round((cycleDay / total) * 100)));
   document.getElementById('hero-sub').innerHTML =
-    `Day ${cycleDay.toLocaleString()} of ${total.toLocaleString()} in the 14th cycle of Babylonian Talmud study`;
+    `Day ${cycleDay.toLocaleString()} of ${total.toLocaleString()} &middot; ${pct}% through the 14th cycle`;
   document.getElementById('bar-fill').style.width = pct + '%';
   document.getElementById('timeline-mid').textContent = `${pct}% complete`;
 }
