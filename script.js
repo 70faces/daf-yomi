@@ -233,12 +233,12 @@ function renderBookshelf(map, current, next) {
    Static profile data — placeholders until Rachel/Grace finalize
    ---------------------------------------------------------------- */
 const TEACHERS = [
-  { name: 'Rachel Scheinerman', initials: 'RS', role: 'Editor in Chief',      bio: 'Founded the Daily Dose project. PhD in rabbinic literature.',          image: 'images/rachel scheinerman.avif' },
-  { name: 'Sara Ronis',         initials: 'SR', role: 'Contributing Writer',  bio: 'Rabbi and educator. Writes on ritual, gender, and law.',                image: 'images/Sara Ronis.jpg' },
-  { name: 'Dr. Elli Fischer',   initials: 'EF', role: 'Contributing Writer',  bio: 'Translator and historian of halakhah.',                                 image: 'images/RabbI-Elli-Fischer.jpg' },
-  { name: 'Rabbi Jay Kelman',   initials: 'JK', role: 'Contributing Writer',  bio: 'Author and Talmud teacher of 30+ years.',                              image: 'images/Rabbi Jay Kelman.png' },
-  { name: 'Ilana Kurshan',      initials: 'IK', role: 'Contributing Writer',  bio: 'Author of If All the Seas Were Ink, a Daf Yomi memoir.',               image: 'images/Ilana Kurshan.jpg' },
-  { name: 'Rabbi Joshua Heller', initials: 'JH', role: 'Contributing Writer', bio: 'Conservative rabbi writing on contemporary halakhah.',                  image: 'images/Joshua Heller.jpg' }
+  { name: 'Rachel Scheinerman',  initials: 'RS', role: 'Editor in Chief',     bio: 'Founded the Daily Dose project. PhD in rabbinic literature.',         image: 'images/rachel scheinerman.avif', url: 'https://www.myjewishlearning.com/author/rscheinerman/' },
+  { name: 'Sara Ronis',          initials: 'SR', role: 'Contributing Writer', bio: 'Rabbi and educator. Writes on ritual, gender, and law.',               image: 'images/Sara Ronis.jpg',          url: 'https://www.myjewishlearning.com/author/sara-ronis/' },
+  { name: 'Dr. Elli Fischer',    initials: 'EF', role: 'Contributing Writer', bio: 'Translator and historian of halakhah.',                                image: 'images/RabbI-Elli-Fischer.jpg',  url: 'https://telaviv.academia.edu/ElliFischer' },
+  { name: 'Rabbi Jay Kelman',    initials: 'JK', role: 'Contributing Writer', bio: 'Author and Talmud teacher of 30+ years.',                             image: 'images/Rabbi Jay Kelman.png',    url: 'https://torahinmotion.org/profile/rabbi-jay-kelman' },
+  { name: 'Ilana Kurshan',       initials: 'IK', role: 'Contributing Writer', bio: 'Author of If All the Seas Were Ink, a Daf Yomi memoir.',              image: 'images/Ilana Kurshan.jpg',       url: 'https://www.myjewishlearning.com/author/ilana-kurshan/' },
+  { name: 'Rabbi Joshua Heller', initials: 'JH', role: 'Contributing Writer', bio: 'Conservative rabbi writing on contemporary halakhah.',                 image: 'images/Joshua Heller.jpg',       url: 'https://www.myjewishlearning.com/author/rabbi-joshua-heller/' }
 ];
 
 const SAGES = [
@@ -345,6 +345,9 @@ function renderProfiles() {
   TEACHERS.forEach(p => {
     const card = document.createElement('a');
     card.className = 'person';
+    card.href = p.url;
+    card.target = '_blank';
+    card.rel = 'noopener';
     const avatarInner = p.image
       ? `<img src="${p.image}" alt="${p.name}" class="avatar-daf">`
       : p.initials;
