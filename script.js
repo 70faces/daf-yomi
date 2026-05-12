@@ -233,7 +233,7 @@ function renderBookshelf(map, current, next) {
    Static profile data — placeholders until Rachel/Grace finalize
    ---------------------------------------------------------------- */
 const TEACHERS = [
-  { name: 'Rachel Scheinerman',  initials: 'RS', role: 'Editor in Chief',     bio: 'Founded the Daily Dose project. PhD in rabbinic literature.',         image: 'images/rachel scheinerman.avif', url: 'https://www.myjewishlearning.com/author/rscheinerman/' },
+  { name: 'Dr. Rachel Scheinerman',  initials: 'RS', role: 'Editor in Chief',     bio: 'Founded the Daily Dose project. PhD in rabbinic literature.',         image: 'images/rachel scheinerman.avif', url: 'https://www.myjewishlearning.com/author/rscheinerman/' },
   { name: 'Dr. Sara Ronis',      initials: 'SR', role: 'Contributing Writer', bio: 'Rabbi and educator. Writes on ritual, gender, and law.',               image: 'images/Sara Ronis.jpg',          url: 'https://www.myjewishlearning.com/author/sara-ronis/' },
   { name: 'Dr. Elli Fischer',    initials: 'EF', role: 'Contributing Writer', bio: 'Translator and historian of halakhah.',                                image: 'images/RabbI-Elli-Fischer.jpg',  url: 'https://telaviv.academia.edu/ElliFischer' },
   { name: 'Rabbi Jay Kelman',    initials: 'JK', role: 'Contributing Writer', bio: 'Author and Talmud teacher of 30+ years.',                             image: 'images/Rabbi Jay Kelman.png',    url: 'https://torahinmotion.org/profile/rabbi-jay-kelman' },
