@@ -1,282 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daf Yomi · My Jewish Learning</title>
-<meta name="description" content="A live hub for the global project of daily Talmud study. Today's daf, archive, teachers, and ways to follow along.">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/lora@5.0.0/index.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.0/600.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5.0.0/700.css">
-<link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="images/mjl-favicon.png">
-<link rel="apple-touch-icon" href="images/mjl-favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Jewish Nursery — Kveller</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #F5EFE4;
+      color: #1A1008;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 18px 48px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .logo { font-size: 30px; font-weight: bold; color: #B52030; letter-spacing: -1.5px; text-decoration: none; }
+    .logo-tag { font-size: 11px; color: #9A8878; letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ── Page layout ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 0 32px 64px; }
+
+    /* ── Intro ── */
+    .intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+    .intro-headline {
+      font-size: 72px;
+      line-height: 0.9;
+      letter-spacing: -4px;
+      text-transform: uppercase;
+      color: #1A1008;
+      flex-shrink: 0;
+    }
+    .intro-headline em { color: #B52030; font-style: italic; }
+    .intro-text {
+      max-width: 420px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: #5A4030;
+      text-align: right;
+      padding-bottom: 6px;
+    }
+    .intro-text strong { color: #B52030; }
+    .cta-mobile { display: none; }
+
+    /* ── Collage container ── */
+    .collage {
+      position: relative;
+      width: 100%;
+      line-height: 0;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .collage img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ── Hotspots ── */
+    .hs {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s ease;
+    }
+    .hs::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 4px;
+      border: 1.5px dashed transparent;
+      transition: border-color 0.15s ease;
+    }
+    .hs:hover::after { border-color: #B52030; }
+    .hs:hover { background: rgba(181, 32, 48, 0.06); }
+
+    /* Floating label */
+    .hs-label {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1A1008;
+      color: #F5EFE4;
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      font-family: Georgia, serif;
+    }
+    .hs:hover .hs-label { opacity: 1; }
+
+    /* Label position overrides for items near top/bottom */
+    .hs.label-below .hs-label {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+    .hs.label-right .hs-label {
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+
+    /* ── Nav chips ── */
+    .nav {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-right: 4px;
+    }
+    .chip {
+      background: transparent;
+      border: 1px solid #C4B4A0;
+      color: #3A2018;
+      padding: 6px 16px;
+      border-radius: 2px;
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      transition: all 0.15s;
+    }
+    .chip:hover { background: #B52030; border-color: #B52030; color: white; }
+
+    /* ── Overlay ── */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,16,8,0.45);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    /* ── Panel ── */
+    .panel {
+      position: fixed;
+      top: 0;
+      right: -580px;
+      width: 560px;
+      max-width: 100vw;
+      height: 100dvh;
+      background: #FAF4EC;
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -8px 0 56px rgba(26,16,8,0.2);
+    }
+    .panel.open { right: 0; }
+
+    .panel-head {
+      padding: 32px 44px 26px;
+      border-bottom: 1px solid #DDD0BC;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .panel-kicker {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-bottom: 8px;
+    }
+    .panel-title {
+      font-size: 36px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: #1A1008;
+    }
+    .panel-close {
+      position: absolute;
+      top: 28px;
+      right: 36px;
+      background: none;
+      border: 1px solid #C4B4A0;
+      color: #9A8878;
+      width: 34px;
+      height: 34px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .panel-close:hover { background: #1A1008; color: #FAF4EC; border-color: #1A1008; }
+
+    .panel-body { flex: 1; overflow-y: auto; padding: 28px 44px 44px; }
+    .panel-intro {
+      font-size: 16px;
+      line-height: 1.78;
+      color: #3A2018;
+      margin-bottom: 26px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid #DDD0BC;
+    }
+    .panel-section {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-bottom: 14px;
+    }
+    .article-list { list-style: none; }
+    .article-item { padding: 13px 0; border-bottom: 1px solid #EDE4D4; }
+    .article-item:last-child { border-bottom: none; }
+    .article-link {
+      display: block;
+      font-size: 15.5px;
+      font-weight: bold;
+      color: #B52030;
+      text-decoration: none;
+      line-height: 1.35;
+      margin-bottom: 4px;
+      transition: color 0.12s;
+    }
+    .article-link:hover { color: #8A1020; }
+    .article-excerpt { font-size: 13px; color: #5A4030; line-height: 1.65; }
+
+    /* ── Mobile topic list ── */
+    .mobile-topics {
+      display: none;
+      margin-top: 20px;
+    }
+    .mobile-topics-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9A8878;
+      margin-bottom: 4px;
+    }
+    .topic-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 13px 0;
+      border-bottom: 1px solid #EDE4D4;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .topic-row:last-child { border-bottom: none; }
+    .topic-row:active { background: rgba(181,32,48,0.06); margin: 0 -8px; padding: 13px 8px; }
+    .topic-thumb {
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+      border-radius: 3px;
+      background-image: url('nursery-hero.png');
+      background-size: 600%;
+      background-repeat: no-repeat;
+    }
+    .topic-info { flex: 1; min-width: 0; }
+    .topic-name {
+      font-size: 15px;
+      font-weight: bold;
+      color: #1A1008;
+      margin-bottom: 3px;
+      font-family: Georgia, serif;
+    }
+    .topic-desc {
+      font-size: 12px;
+      color: #5A4030;
+      line-height: 1.5;
+      font-family: Georgia, serif;
+    }
+    .topic-arrow {
+      color: #B52030;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 720px) {
+      .intro { flex-direction: column; gap: 12px; }
+      .intro-headline { font-size: 44px; }
+      .intro-text { text-align: left; max-width: 100%; }
+      .panel { width: 100vw; right: -100vw; }
+      .panel-head { padding: 24px; }
+      .panel-body { padding: 22px; }
+      /* Hide hotspots and desktop nav on mobile */
+      .hs { display: none !important; }
+      .nav { display: none; }
+      /* Show mobile list */
+      .mobile-topics { display: block; }
+      /* Swap CTA copy */
+      .cta-desktop { display: none; }
+      .cta-mobile { display: inline; color: #B52030; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="page-header">
-  <div class="header-inner">
-    <a href="https://www.myjewishlearning.com/" class="logo-link">My Jewish Learning</a>
-    <nav class="header-nav">
-      <a href="https://www.myjewishlearning.com/category/study/jewish-texts/talmud/">All Talmud</a>
-      <a href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/" class="nav-cta">Subscribe</a>
-    </nav>
-  </div>
+<header>
+  <a href="#" class="logo">kveller</a>
+  <span class="logo-tag">Jewish Parenting</span>
 </header>
 
-<main class="page">
+<div class="page">
 
-  <!-- HERO: TODAY'S DAF -->
-  <section class="card hero">
-    <div class="eyebrow" id="hero-eyebrow">Today on Daf Yomi</div>
-    <h1 class="h-title" id="hero-title">Loading today's page&hellip;</h1>
-    <p class="hero-intro">Every day, over 100,000 people around the world read the same page of the Talmud. This is today's.</p>
-    <p class="h-sub" id="hero-sub">&nbsp;</p>
-    <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
-    <div class="timeline-row">
-      <span>Jan 5, 2020</span><span id="timeline-mid">&mdash;</span><span>Jun 7, 2027</span>
-    </div>
-    <div class="btn-row">
-      <a class="btn-primary" id="read-today-cta" href="https://www.myjewishlearning.com/category/study/jewish-texts/talmud/">Read Today's Dose</a>
-    </div>
-  </section>
-
-  <!-- WHY FOLLOW ALONG -->
-  <aside class="why">
-    <div class="why-eye">Why follow along</div>
-    <h2 class="why-h">The Talmud is the bedrock of Jewish thought</h2>
-    <p class="why-body">Every prayer, every holiday, every ritual you've encountered traces back to its arguments. Daf Yomi opens that 2,711-page library one page at a time. <em>A Daily Dose of Talmud</em> translates each one into a five-minute, plain-English insight &mdash; no Hebrew, no Aramaic, no prior knowledge required.</p>
-    <a class="btn-primary" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">Subscribe — it's free</a>
-  </aside>
-
-  <!-- UPCOMING EVENTS -->
-  <section class="upcoming">
-    <div class="upcoming-bg"></div>
-    <div class="upcoming-content">
-      <div class="upcoming-eye">What's coming up</div>
-      <h2 class="upcoming-title">Study opportunities</h2>
-      <div class="upcoming-list">
-        <a class="upcoming-event" href="https://www.myjewishlearning.com/off-the-daf-a-talmud-book-club/">
-          <div class="upcoming-event-bg" style="background-image:url('images/chabbath_31a.jpg')"></div>
-          <div class="upcoming-date">May 19</div>
-          <div class="upcoming-body">
-            <div class="upcoming-type">Off the Daf · Book Club</div>
-            <div class="upcoming-name">Live author conversation — <em>The Garden and the Workshop</em></div>
-          </div>
-        </a>
-        <a class="upcoming-event" href="https://docs.google.com/forms/d/e/1FAIpQLSeM09B8nrxRVTwZk7Do-VammeDzMNimev6MqXLDOInFhuc2eQ/viewform">
-          <div class="upcoming-event-bg" style="background-image:url('images/baba-metsia_59b.jpg')"></div>
-          <div class="upcoming-date">May 22</div>
-          <div class="upcoming-body">
-            <div class="upcoming-type">Week in Review · Zoom</div>
-            <div class="upcoming-name">Weekly recap — Thursdays 9:30 AM ET</div>
-          </div>
-        </a>
-        <a class="upcoming-event" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">
-          <div class="upcoming-event-bg" style="background-image:url('images/brakhot_2a.jpg')"></div>
-          <div class="upcoming-date">Jun 7</div>
-          <div class="upcoming-body">
-            <div class="upcoming-type">Siyyum · Completion Celebration</div>
-            <div class="upcoming-name">Tractate Chullin — join the global celebration</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <div class="sec-divider"></div>
-
-  <!-- BOOKSHELF -->
-  <div class="eyebrow eyebrow-c">The 14th cycle &middot; 37 volumes</div>
-  <h2 class="h-title h-center">The Talmud, on a shelf</h2>
-  <p class="h-sub h-center">Pull any volume down to read its archive of Daily Doses</p>
-
-  <div class="room">
-    <div class="shelf-row" id="row-1"></div>
-    <div class="shelf-floor"></div>
-    <div class="shelf-row" id="row-2"></div>
-    <div class="shelf-floor"></div>
-    <div class="shelf-row" id="row-3"></div>
-    <div class="shelf-floor"></div>
-    <div class="legend">
-      <span><span class="legend-swatch done"></span>Read</span>
-      <span><span class="legend-swatch cur"></span>Reading now</span>
-      <span><span class="legend-swatch next"></span>Next &middot; May 2</span>
-      <span><span class="legend-swatch"></span>Upcoming</span>
-    </div>
+  <div class="intro">
+    <div class="intro-headline">The<br>Jewish<br><em>Nursery</em></div>
+    <p class="intro-text">Everything a new Jewish parent needs to know — from the pregnancy test to your baby's first Shabbat. <strong class="cta-desktop">Click the items</strong><strong class="cta-mobile">Scroll down</strong> to explore each topic.</p>
   </div>
 
-  <div class="sec-divider"></div>
+  <!-- ── Collage image with hotspots ── -->
+  <!-- Image is 1344×896. All hotspot positions are percentages of those dimensions. -->
+  <div class="collage" id="collage">
+    <img src="nursery-hero.png" alt="A Jewish nursery collage — baby in wicker chair surrounded by Jewish baby items" draggable="false">
 
-  <!-- MEET YOUR TEACHERS -->
-  <p class="section-h">The voices behind the project</p>
-  <h2 class="section-title">Meet your teachers</h2>
-  <p class="section-sub">A rotating team of rabbis, scholars, and writers craft each Daily Dose.</p>
-  <div class="scroll-row" id="teachers"></div>
-
-  <!-- MEET THE SAGES -->
-  <p class="section-h" style="margin-top:1.5rem;">From inside the text</p>
-  <h2 class="section-title">Meet the sages</h2>
-  <p class="section-sub">The rabbis you'll encounter on every page &mdash; quick primers on who they are and why they matter.</p>
-  <div class="scroll-row" id="sages"></div>
-
-  <div class="sec-divider"></div>
-
-  <!-- REFERENCE LIBRARY -->
-  <p class="section-h">Reference library</p>
-  <h2 class="section-title">Talmud, in plain English</h2>
-  <p class="section-sub">If a term in today's Daily Dose stops you, start here.</p>
-
-  <div class="ref-grid">
-    <a class="ref" href="https://www.myjewishlearning.com/article/talmud-101/">
-      <div class="ref-title">What is the Talmud?</div>
-      <p class="ref-desc">Mishnah, Gemara, and the 1,500-year conversation that shaped Jewish life.</p>
-    </a>
-    <a class="ref" href="https://www.myjewishlearning.com/article/the-mishnah/">
-      <div class="ref-title">Mishnah vs. Gemara</div>
-      <p class="ref-desc">The two layers on every page, and what each one contributes.</p>
-    </a>
-    <a class="ref" href="https://www.myjewishlearning.com/article/the-jerusalem-talmud/">
-      <div class="ref-title">Bavli vs. Yerushalmi</div>
-      <p class="ref-desc">Two Talmuds, two communities &mdash; why Daf Yomi follows the Babylonian.</p>
-    </a>
-    <a class="ref" href="https://www.myjewishlearning.com/article/talmud-words-and-phrases/">
-      <div class="ref-title">Glossary of terms</div>
-      <p class="ref-desc">Halakhah, aggadah, sugya, machloket &mdash; words that come up over and over.</p>
-    </a>
-    <a class="ref" href="https://www.myjewishlearning.com/article/the-six-orders-of-the-mishnah/">
-      <div class="ref-title">The six orders</div>
-      <p class="ref-desc">How the Talmud organizes itself &mdash; Zera'im, Mo'ed, Nashim, Nezikin, Kodashim, Tahorot.</p>
-    </a>
-    <a class="ref" href="https://www.myjewishlearning.com/article/9-things-to-know-about-the-daf-yomi-daily-page-of-talmud/">
-      <div class="ref-title">9 things to know about Daf Yomi</div>
-      <p class="ref-desc">A quick-read overview of the practice, its history, and how to make sense of what you're reading each day.</p>
-    </a>
-  </div>
-
-  <div class="sec-divider"></div>
-
-  <!-- STUDY WITH US: 5 WAYS -->
-  <p class="section-h">Five ways to engage</p>
-  <h2 class="section-title">Study with us</h2>
-  <p class="section-sub">However you like to learn &mdash; by email, by Zoom, by video, by book, by community.</p>
-
-  <div class="ways-grid">
-    <a class="way feat" href="https://www.myjewishlearning.com/get-your-daily-dose-of-talmud/">
-      <div class="way-ico way-heb">א</div>
-      <div>
-        <div class="way-eye">Daily &middot; email</div>
-        <h3 class="way-title">A Daily Dose of Talmud</h3>
-        <p class="way-desc">Five-minute insight on the day's page, in your inbox every morning. The heart of the project.</p>
-      </div>
-    </a>
-    <a class="way" href="https://docs.google.com/forms/d/e/1FAIpQLSeM09B8nrxRVTwZk7Do-VammeDzMNimev6MqXLDOInFhuc2eQ/viewform">
-      <div class="way-ico way-heb">ש</div>
-      <div>
-        <div class="way-eye">Weekly &middot; Thursdays 9:30 AM ET</div>
-        <h3 class="way-title">The Week in Review</h3>
-        <p class="way-desc">Live Zoom recap of the week's pages, hosted by a familiar Daily Dose writer. Free.</p>
-      </div>
-    </a>
-    <a class="way" href="https://www.myjewishlearning.com/off-the-daf-a-talmud-book-club/">
-      <div class="way-ico way-heb">ס</div>
-      <div>
-        <div class="way-eye">Monthly &middot; book club</div>
-        <h3 class="way-title">Off the Daf</h3>
-        <p class="way-desc">Fiction and nonfiction inspired by the Talmud, with live conversations with authors.</p>
-      </div>
-    </a>
-    <a class="way" href="https://www.youtube.com/@MyJewishLearning">
-      <div class="way-ico way-heb">ר</div>
-      <div>
-        <div class="way-eye">Anytime &middot; video</div>
-        <h3 class="way-title">Class archive</h3>
-        <p class="way-desc">Past Highlights sessions on YouTube &mdash; go back and rewatch anything you missed.</p>
-      </div>
-    </a>
-    <a class="way way-full" href="https://www.facebook.com/groups/dafyomi">
-      <div class="way-ico way-heb">ק</div>
-      <div>
-        <div class="way-eye">Daily &middot; community</div>
-        <h3 class="way-title">Daf Yomi Facebook group</h3>
-        <p class="way-desc">Our most active community &mdash; thousands of readers asking questions, sharing reactions, and discussing each day's page in real time.</p>
-      </div>
-    </a>
-  </div>
-
-  <div class="sec-divider"></div>
-
-  <!-- FAQ -->
-  <p class="section-h">Frequently asked</p>
-  <div class="faq">
-    <details open>
-      <summary>Do I need to know Hebrew or Aramaic?</summary>
-      <p class="faq-body">Not at all. The Daily Dose is written in clear English. Hebrew and Aramaic terms are explained in context. Many of our most loyal readers have no formal Jewish education or language background.</p>
-    </details>
-    <details>
-      <summary>What if I miss a day or fall behind?</summary>
-      <p class="faq-body">Don't worry about it. Most Daf Yomi readers miss days. The schedule waits for no one, but the archive is always here, and the next email always lands tomorrow. Consistency over perfection.</p>
-    </details>
-    <details>
-      <summary>How long does each day take?</summary>
-      <p class="faq-body">The Daily Dose is a five-minute read. Studying the actual page in depth typically takes 45&ndash;60 minutes, but that's optional &mdash; the email alone is meaningful.</p>
-    </details>
-    <details>
-      <summary>When does the current cycle end?</summary>
-      <p class="faq-body">The 14th cycle began January 5, 2020 and ends around June 7, 2027 with a global Siyyum HaShas celebration. The 15th cycle begins immediately after.</p>
-    </details>
-  </div>
-
-</main>
-
-<footer class="page-footer">
-  <p>A redesigned Daf Yomi hub for <a href="https://www.myjewishlearning.com/">My Jewish Learning</a> &middot; demo preview</p>
-</footer>
-
-<!-- SAGE MODAL -->
-<div class="sage-overlay" id="sage-modal">
-  <div class="sage-card">
-    <button class="sage-close" id="sage-close">✕</button>
-    <div class="sage-portrait">
-      <img class="sage-portrait-img" id="sm-img" src="" alt="">
-      <div class="sage-portrait-fade"></div>
-      <div class="sage-portrait-name">
-        <div class="sage-card-name" id="sm-name"></div>
-        <div class="sage-card-era" id="sm-era"></div>
-      </div>
+    <!-- 1. BABY IN WICKER CHAIR (center oval) → What's Next
+         Shortened to stay within the circular photo, not bleed into bottom items -->
+    <div class="hs label-below"
+         style="left:22%; top:1%; width:50%; height:62%"
+         onclick="openPanel('nextsteps')"
+         tabindex="0" aria-label="Baby — What's Next">
+      <span class="hs-label">What's Next</span>
     </div>
-    <div class="sage-body">
-      <div class="sage-grid">
-        <div class="sage-field">
-          <div class="sage-label">Period</div>
-          <div class="sage-value" id="sm-period"></div>
-        </div>
-        <div class="sage-field">
-          <div class="sage-label">Based in</div>
-          <div class="sage-value" id="sm-basedin"></div>
-        </div>
-        <div class="sage-field sage-field-full">
-          <div class="sage-label">Known for</div>
-          <div class="sage-value" id="sm-knownfor"></div>
-        </div>
-        <div class="sage-field sage-field-full">
-          <div class="sage-label">Debates with</div>
-          <div class="sage-value" id="sm-debates"></div>
-        </div>
-      </div>
-      <div class="sage-teaching">
-        <div class="sage-label">A teaching</div>
-        <p class="sage-quote" id="sm-teaching"></p>
-      </div>
-      <div class="sage-tip">
-        <div class="sage-label">On the page</div>
-        <div class="sage-value" id="sm-onpage"></div>
-      </div>
+
+    <!-- 2. MEZUZAH (left side, nestled beside fern) → Creating a Jewish Home
+         Trim top so it starts at mezuzah, widen right to cover full width -->
+    <div class="hs"
+         style="left:11.5%; top:48%; width:6%; height:26%"
+         onclick="openPanel('home')"
+         tabindex="0" aria-label="Mezuzah — Creating a Jewish Home">
+      <span class="hs-label">Jewish Home</span>
     </div>
-  </div>
+
+    <!-- 3. CANDLESTICK + KIDDUSH CUP + SIDDUR (bottom left) → Bris & Baby Naming
+         Extended right to cover full span of kiddush cup + siddur -->
+    <div class="hs"
+         style="left:1.1%; top:69.2%; width:18%; height:26%"
+         onclick="openPanel('bris')"
+         tabindex="0" aria-label="Ceremonial items — Bris & Baby Naming">
+      <span class="hs-label">Bris &amp; Baby Naming</span>
+    </div>
+
+    <!-- 4. BABY BOOTIES (bottom center-left) → Shopping for Baby
+         Moved right to sit over the booties -->
+    <div class="hs"
+         style="left:21%; top:77%; width:13%; height:20%"
+         onclick="openPanel('shopping')"
+         tabindex="0" aria-label="Baby booties — Shopping for Baby">
+      <span class="hs-label">Shopping for Baby</span>
+    </div>
+
+    <!-- 5. HEBREW BLOCKS (bottom center) → Picking a Jewish Name
+         Moved right to sit over the blocks cluster -->
+    <div class="hs"
+         style="left:37%; top:77%; width:21%; height:20%"
+         onclick="openPanel('name')"
+         tabindex="0" aria-label="Hebrew blocks — Picking a Jewish Name">
+      <span class="hs-label">Picking a Name</span>
+    </div>
+
+    <!-- 6. BOOK BASKET (bottom right center) → Jewish Books -->
+    <div class="hs"
+         style="left:56.2%; top:68.6%; width:27.8%; height:27.8%"
+         onclick="openPanel('books')"
+         tabindex="0" aria-label="Book basket — Jewish Books">
+      <span class="hs-label">Jewish Books</span>
+    </div>
+
+    <!-- 7. GOLD-FRAMED VINTAGE PHOTO (right) → Jewish Grandparents
+         Moved right to sit over the painting -->
+    <div class="hs label-right"
+         style="left:80%; top:33%; width:15%; height:29%"
+         onclick="openPanel('grandparents')"
+         tabindex="0" aria-label="Family photo — Jewish Grandparents">
+      <span class="hs-label">Jewish Grandparents</span>
+    </div>
+
+    <!-- 8. KNITTED BLANKET + FLOWERS (far bottom right) → Jewish Pregnancy -->
+    <div class="hs label-right"
+         style="left:83%; top:77.6%; width:15.8%; height:19.6%"
+         onclick="openPanel('pregnancy')"
+         tabindex="0" aria-label="Blanket — Jewish Pregnancy">
+      <span class="hs-label">Jewish Pregnancy</span>
+    </div>
+
+  </div><!-- /collage -->
+
+  <nav class="nav">
+    <span class="nav-label">Explore ↗</span>
+    <button class="chip" onclick="openPanel('pregnancy')">Jewish Pregnancy</button>
+    <button class="chip" onclick="openPanel('name')">Picking a Name</button>
+    <button class="chip" onclick="openPanel('bris')">Bris &amp; Baby Naming</button>
+    <button class="chip" onclick="openPanel('shopping')">Shopping for Baby</button>
+    <button class="chip" onclick="openPanel('grandparents')">Jewish Grandparents</button>
+    <button class="chip" onclick="openPanel('books')">Jewish Books</button>
+    <button class="chip" onclick="openPanel('home')">Jewish Home</button>
+    <button class="chip" onclick="openPanel('nextsteps')">What's Next</button>
+  </nav>
+
+  <!-- ── Mobile topic list (hidden on desktop) ── -->
+  <!-- Thumbnails use background-position to crop the collage image to each item -->
+  <!-- background-size: 600% means 6× zoom; positions calculated from item center coords -->
+  <div class="mobile-topics">
+    <p class="mobile-topics-label">Explore each topic</p>
+
+    <div class="topic-row" onclick="openPanel('pregnancy')">
+      <div class="topic-thumb" style="background-position: 100% 100%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Jewish Pregnancy</div>
+        <div class="topic-desc">Ayin hara, genetic testing, doulas &amp; birth traditions</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('bris')">
+      <div class="topic-thumb" style="background-position: 0% 97%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Bris &amp; Baby Naming</div>
+        <div class="topic-desc">Brit milah, baby naming ceremonies &amp; how to find a mohel</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('name')">
+      <div class="topic-thumb" style="background-position: 40% 100%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Picking a Name</div>
+        <div class="topic-desc">Hebrew names, honoring loved ones &amp; family tradition</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('shopping')">
+      <div class="topic-thumb" style="background-position: 22% 100%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Shopping for Baby</div>
+        <div class="topic-desc">Gift guides, mezuzahs &amp; Jewish registry essentials</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('grandparents')">
+      <div class="topic-thumb" style="background-position: 88% 42%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Jewish Grandparents</div>
+        <div class="topic-desc">Bubbe, Saba, Savta &amp; the stories only they can tell</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('books')">
+      <div class="topic-thumb" style="background-position: 72% 87%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Jewish Books</div>
+        <div class="topic-desc">The best Jewish board books to start your baby's shelf</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('home')">
+      <div class="topic-thumb" style="background-position: 0% 65%"></div>
+      <div class="topic-info">
+        <div class="topic-name">Creating a Jewish Home</div>
+        <div class="topic-desc">Mezuzahs, Shabbat rituals &amp; making your home feel Jewish</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+    <div class="topic-row" onclick="openPanel('nextsteps')">
+      <div class="topic-thumb" style="background-position: 45% 30%"></div>
+      <div class="topic-info">
+        <div class="topic-name">What's Next</div>
+        <div class="topic-desc">First holidays, Jewish education &amp; finding your village</div>
+      </div>
+      <span class="topic-arrow">→</span>
+    </div>
+
+  </div><!-- /mobile-topics -->
+
 </div>
 
-<script src="script.js"></script>
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+<!-- Panel -->
+<div class="panel" id="panel">
+  <div class="panel-head">
+    <button class="panel-close" onclick="closePanel()" aria-label="Close">✕</button>
+    <div class="panel-kicker">A Kveller Guide</div>
+    <div class="panel-title" id="panelTitle"></div>
+  </div>
+  <div class="panel-body" id="panelBody"></div>
+</div>
+
+<script>
+const topics = {
+  pregnancy: {
+    title: 'Jewish Pregnancy',
+    intro: 'From the question of baby showers (<em>ayin hara</em>, anyone?) to finding a Jewish doula to Ashkenazi genetic testing — pregnancy comes with its own Jewish dimension. We\'ve got you, wherever you are on the spectrum.',
+    articles: [
+      { title: 'What Makes a Pregnancy Jewish?', excerpt: 'Jewish superstitions, the evil eye, baby showers, genetic testing, and prayers — a guide to the Jewish side of expecting.' },
+      { title: 'Should I Have a Jewish Baby Shower?', excerpt: 'Because of the belief in the evil eye (<em>ayin hara</em>), some Jews choose not to celebrate before the birth. Here\'s how to navigate the question.' },
+      { title: 'Is There Such a Thing as a Jewish Doula?', excerpt: 'Yes — some doulas incorporate Jewish rituals, including going to the mikveh and Jewish prayers, into their birth support work.' },
+      { title: 'Ashkenazi Genetic Testing: What You Need to Know', excerpt: 'An important guide for Ashkenazi Jews hoping to have a biological baby, covering Tay-Sachs, Gaucher, cystic fibrosis, and more.' },
+      { title: 'Jewish Pregnancy Prayers and Blessings', excerpt: 'From the Shehechiyanu to prayers for a healthy pregnancy — spiritual practices to embrace during this time.' },
+    ]
+  },
+  name: {
+    title: 'Picking a Jewish Name',
+    intro: 'What\'s in a name? When you\'re Jewish — a lot. Tradition, history, hope for your child\'s future, and often a Hebrew name on top of their legal name. We\'ll help you navigate it all.',
+    articles: [
+      { title: 'Everything About Jewish Naming Traditions', excerpt: 'Ashkenazi, Sephardic, and modern approaches — plus creative ways to honor a loved one\'s memory while finding a name you actually love.' },
+      { title: 'What\'s in a Hebrew Name?', excerpt: 'Used for Jewish ceremonial life — from the bris to bar/bat mitzvah to reading Torah. How to choose a Hebrew name that means something.' },
+      { title: 'The Kveller Baby Name Finder', excerpt: 'Browse thousands of Jewish baby names by meaning, origin, and Hebrew letter.' },
+      { title: 'Creative Ways to Honor a Loved One in a Name', excerpt: '"We named our daughter Elissa, after my grandma Estelle." How Jewish families navigate the Ashkenazi naming tradition creatively.' },
+      { title: 'The Most Popular Jewish Baby Names Right Now', excerpt: 'From classic Hebrew to Yiddish revivals — what Jewish parents are choosing today.' },
+    ]
+  },
+  bris: {
+    title: 'Bris & Baby Naming',
+    intro: 'Within the first days of your baby\'s life, you\'ll have a chance to publicly welcome them into Jewish life — with either a <em>brit milah</em> (bris) or a Jewish baby naming ceremony. Both are beautiful. The bagel spread is strongly encouraged.',
+    articles: [
+      { title: 'What Is a Bris?', excerpt: '<em>Brit milah</em> — the Jewish covenant of circumcision — typically happens on the 8th day after birth, performed by a mohel, often alongside a rabbi and family.' },
+      { title: 'Do I Have to Have a Bris?', excerpt: 'The bris is one of the more controversial Jewish rituals. You\'re not alone in feeling conflicted — and you can welcome a Jewish baby without one.' },
+      { title: 'How to Choose a Mohel', excerpt: 'Ask your rabbi, check parenting forums, or ask the community. Here\'s what to look for when finding the right person for your family.' },
+      { title: 'What Is a Jewish Baby Naming Ceremony?', excerpt: 'Baby namings became popular in the 1970s as a rite of passage for newborn girls — and they\'re a meaningful option for any baby.' },
+      { title: 'Planning an Interfaith Baby Naming', excerpt: 'Beautiful ways to incorporate your family\'s other faiths and traditions — and to help non-Jewish relatives feel welcomed and included.' },
+    ]
+  },
+  shopping: {
+    title: 'Shopping for Your Jewish Baby',
+    intro: 'Put a mezuzah on it. Add a Jewish board book. Whether you\'re building a registry or shopping for a shower gift, there are so many wonderful ways to bring Jewish tradition into the nursery from day one.',
+    articles: [
+      { title: 'The Best Jewish Baby Shower Gifts', excerpt: 'Mezuzahs, Hebrew name art, Jewish board books, Shabbat-themed gear and more — the definitive Kveller gift guide.' },
+      { title: 'Beautiful Mezuzahs for the Nursery', excerpt: 'Every Jewish home needs a mezuzah — and a nursery is the perfect place for a special one.' },
+      { title: 'The Best Jewish Board Books for Babies', excerpt: 'Start your baby\'s Jewish library early. Trust us on the board books.' },
+      { title: 'Jewish Baby Clothing and Gear We Love', excerpt: 'Chai onesies, Hebrew alphabet prints, and other Jewish-themed baby items worth putting on your registry.' },
+      { title: 'Jewish-Owned Baby Brands to Support', excerpt: 'Shop Jewish and support makers who bring Jewish values and aesthetics to baby gear.' },
+    ]
+  },
+  grandparents: {
+    title: 'Jewish Grandparents',
+    intro: 'Having Jewish grandparents and grandparent-like figures in your life is a blessing — and not just because they can take the baby while you nap. Think of the stories and traditions they\'ll pass on.',
+    articles: [
+      { title: 'What Will Your Child Call Their Grandparents?', excerpt: 'Savta, Bubbe, Nonna, Saba — a guide to Jewish grandparent names in Hebrew, Yiddish, and Ladino. Worth deciding before the baby arrives.' },
+      { title: 'Including Grandparents in Jewish Rituals', excerpt: 'The <em>sandek</em> (who holds the baby at the bris), honors at the baby naming — meaningful ways to involve grandparents from day one.' },
+      { title: 'How to Honor Grandparents in Your Baby\'s Name', excerpt: 'Jewish naming traditions create a beautiful intergenerational connection. How to make that connection meaningful for your family.' },
+      { title: 'Setting Boundaries with Loving but Opinionated Grandparents', excerpt: 'You love them. They have a lot of thoughts. Here\'s how to navigate it with grace.' },
+      { title: 'The Stories Only Grandparents Can Tell', excerpt: 'Why grandparents are your child\'s most powerful connection to Jewish history, memory, and family tradition.' },
+    ]
+  },
+  books: {
+    title: 'Jewish Books for Baby',
+    intro: 'At Kveller, we think books make the best gifts. Jewish board books are one of the most powerful ways to introduce your baby to Jewish traditions, holidays, language, and culture. Start early — like, day one.',
+    articles: [
+      { title: 'The Best Jewish Board Books for Babies', excerpt: 'The definitive Kveller list — every Jewish baby needs these on their shelf.' },
+      { title: 'Jewish Picture Books for Toddlers', excerpt: 'As they grow, expand their Jewish bookshelf with beautiful picture books about holidays, heroes, and Jewish values.' },
+      { title: 'Jewish Holiday Books the Whole Family Will Love', excerpt: 'From Shabbat to High Holidays to Passover — books that make Jewish holidays come alive for even the youngest readers.' },
+      { title: 'Hebrew Alphabet Books We Love', excerpt: 'Introduce your baby to Hebrew letters early with these gorgeous, engaging alef-bet books.' },
+      { title: 'Why Reading Jewish Stories Matters', excerpt: 'Why reading Jewish stories aloud — from the very beginning — is one of the most powerful ways to transmit culture and values.' },
+    ]
+  },
+  home: {
+    title: 'Creating a Jewish Home',
+    intro: 'One of the most meaningful gifts you can give your new baby is a warm, Jewish home. It doesn\'t have to be elaborate — a mezuzah on the door, candles on Friday night, a song at bedtime. It all starts here.',
+    articles: [
+      { title: 'How to Put Up a Mezuzah', excerpt: 'What\'s inside it, which doorways need one, how to hang it correctly — and why even a simple nursery mezuzah is a powerful act.' },
+      { title: 'Starting Shabbat Rituals with a Newborn', excerpt: 'Simple, beautiful ways to begin a Shabbat practice even with a newborn in the house. It doesn\'t have to be perfect.' },
+      { title: 'Jewish Art for a Baby\'s Room', excerpt: 'Hebrew alphabet prints, framed blessings, hand-lettered prayers — beautiful Jewish art perfect for a nursery.' },
+      { title: 'Prayers and Blessings for Your New Baby', excerpt: 'From the Shehechiyanu to the bedtime <em>Shema</em> — Jewish prayers to share with your newborn.' },
+      { title: 'How to Make Your Home Feel Jewish', excerpt: 'Jewish identity is built in the everyday — the books on the shelves, the food in the kitchen, the songs at bedtime.' },
+    ]
+  },
+  nextsteps: {
+    title: 'What\'s Next',
+    intro: 'Congratulations — you\'ve made it through the newborn basics. Now comes the beautiful, ongoing work of being a Jewish parent. Here\'s what to know about the first weeks and months, and what lies ahead.',
+    articles: [
+      { title: 'Postpartum Depression and Jewish Parenting', excerpt: 'PPD and PPA are very common and often under-screened. If you\'re experiencing either, you are not alone. Kveller has resources and community.' },
+      { title: 'Feeding Your Baby — and Yourself', excerpt: 'In the first days of parenting, lean on the Jewish tradition of community food. Accept all the casseroles.' },
+      { title: 'When Do I Start Jewish Education?', excerpt: 'From Jewish preschool to Hebrew school to summer camp — how to think about your child\'s Jewish education from the very beginning.' },
+      { title: 'Celebrating Your Baby\'s First Jewish Holidays', excerpt: 'From their first Hanukkah to their first Passover seder — how to make the Jewish calendar magical for your growing child.' },
+      { title: 'Building Your Jewish Village', excerpt: 'Finding a synagogue home, Jewish parents groups, and the community that will support your whole family.' },
+    ]
+  }
+};
+
+function openPanel(id) {
+  const t = topics[id];
+  if (!t) return;
+  document.getElementById('panelTitle').textContent = t.title;
+  document.getElementById('panelBody').innerHTML = `
+    <p class="panel-intro">${t.intro}</p>
+    <p class="panel-section">On Kveller</p>
+    <ul class="article-list">${t.articles.map(a => `
+      <li class="article-item">
+        <a class="article-link" href="#">${a.title}</a>
+        <p class="article-excerpt">${a.excerpt}</p>
+      </li>`).join('')}
+    </ul>`;
+  document.getElementById('overlay').classList.add('open');
+  const panel = document.getElementById('panel');
+  panel.classList.add('open');
+  panel.querySelector('.panel-body').scrollTop = 0;
+}
+
+function closePanel() {
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('panel').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+document.querySelectorAll('.hs').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+  });
+});
+</script>
 </body>
 </html>
