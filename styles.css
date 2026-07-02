@@ -91,11 +91,28 @@ a:hover { color: #3FC6F3; }
   text-align: center;
   font-size: 28px;
 }
+.hero-headline {
+  font-size: 38px;
+  margin-bottom: 14px;
+}
 .hero-intro {
   font-size: 18px;
   line-height: 1.6;
   color: rgba(29,41,54,0.88);
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.75rem;
+}
+.hero-daf-eyebrow {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+.daf-today {
+  font-family: 'Lora Variable', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1D2936;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  line-height: 1.2;
 }
 .h-sub {
   font-size: 17px;
